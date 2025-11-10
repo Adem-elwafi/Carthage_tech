@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <title>TechZone – Accueil</title>
+</head>
+<body>
+    <!-- Header (Barre de navigation) -->
+    <header class="site-header">
+        <div class="topbar" role="navigation" aria-label="Barre supérieure">
+            <!-- Logo -->
+            <a href="#" class="logo" aria-label="TechZone – Accueil">TechZone</a>
+
+            <!-- Barre de recherche (centrée) -->
+            <form class="search" role="search" aria-label="Recherche produits">
+                <input type="search" name="q" placeholder="Rechercher des produits, marques…" aria-label="Rechercher" />
+                <button type="submit" class="search-btn" aria-label="Lancer la recherche">
+                    <!-- Icône loupe (SVG) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </button>
+            </form>
+
+            <!-- Icône Panier (à droite) -->
+            <a href="#" class="cart" aria-label="Voir le panier">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39A2 2 0 0 0 9.62 16h7.76a2 2 0 0 0 2-1.61L21 8H6"></path>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Menu principal -->
+        <nav class="main-nav" aria-label="Menu principal">
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Nouveautés</a></li>
+                <li><a href="#">Meilleures ventes</a></li>
+                <li><a href="#">Ordinateurs</a></li>
+                <li><a href="#">Accessoires</a></li>
+                <li><a href="#">Réseaux</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="page-content" aria-label="Contenu principal">
+        <!-- Hero Section -->
+        <section class="hero" aria-label="Bannière principale">
+            <div class="hero-content">
+                <h1>Bienvenue chez TechZone — Votre univers IT</h1>
+                <p>Découvrez les dernières nouveautés en informatique, accessoires et plus</p>
+                <a href="#produits" class="btn btn-primary" aria-label="Voir les produits TechZone">Voir les produits</a>
+            </div>
+        </section>
+        <!-- Ancre produits (placeholder) -->
+        <section id="produits" aria-label="Liste des produits"></section>
+
+        <!-- Section Catégories -->
+        <section class="categories" aria-labelledby="categories-heading">
+            <div class="container">
+                <h2 id="categories-heading">Nos catégories</h2>
+                <div class="categories-grid">
+                    <!-- Ordinateurs -->
+                    <article class="category-card" aria-label="Catégorie Ordinateurs">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="20" x2="16" y2="20"></line></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3>Ordinateurs</h3>
+                            <p>PC portables, bureaux, gaming et stations de travail.</p>
+                            <a href="#" class="btn btn-soft" aria-label="Voir plus Ordinateurs">Voir plus</a>
+                        </div>
+                    </article>
+                    <!-- Accessoires -->
+                    <article class="category-card" aria-label="Catégorie Accessoires">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83a2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33a1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2a2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0a2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2a2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83a2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33h.09A1.65 1.65 0 0 0 9 4.6V4a2 2 0 0 1 2-2a2 2 0 0 1 2 2v.09c.45.08.85.29 1.18.62c.33.33.54.73.62 1.18H15a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0a2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09c.45.08.85.29 1.18.62c.33.33.54.73.62 1.18H21a2 2 0 0 1 2 2a2 2 0 0 1-2 2h-.09c-.08.45-.29.85-.62 1.18c-.33.33-.73.54-1.18.62Z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3>Accessoires</h3>
+                            <p>Souris, claviers, casques, stockage externe.</p>
+                            <a href="#" class="btn btn-soft" aria-label="Voir plus Accessoires">Voir plus</a>
+                        </div>
+                    </article>
+                    <!-- Réseaux -->
+                    <article class="category-card" aria-label="Catégorie Réseaux">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4"></path><path d="M18 12h4"></path><path d="M8 12h8"></path><path d="M12 8v4"></path><path d="M12 12v4"></path><circle cx="12" cy="4" r="2"></circle><circle cx="12" cy="20" r="2"></circle></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3>Réseaux</h3>
+                            <p>Routeurs, switches, Wi‑Fi pro et sécurité.</p>
+                            <a href="#" class="btn btn-soft" aria-label="Voir plus Réseaux">Voir plus</a>
+                        </div>
+                    </article>
+                    <!-- Logiciels -->
+                    <article class="category-card" aria-label="Catégorie Logiciels">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="8" height="8"></rect><rect x="14" y="2" width="8" height="8"></rect><rect x="2" y="14" width="8" height="8"></rect><rect x="14" y="14" width="8" height="8"></rect></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3>Logiciels</h3>
+                            <p>OS, productivité, création et sécurité.</p>
+                            <a href="#" class="btn btn-soft" aria-label="Voir plus Logiciels">Voir plus</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bannière promotionnelle -->
+        <section class="promo" aria-labelledby="promo-heading">
+            <div class="promo-inner">
+                <h2 id="promo-heading">Offre spéciale — Livraison gratuite dès 49€</h2>
+                <a href="#" class="btn btn-contrast" aria-label="Profitez de l'offre de livraison gratuite">Profitez-en</a>
+            </div>
+        </section>
+
+        <!-- Produits en vedette -->
+        <section class="featured" aria-labelledby="featured-heading">
+            <div class="container">
+                <h2 id="featured-heading">Produits en vedette</h2>
+                <div class="products-grid">
+                    <!-- Ordinateur portable -->
+                    <article class="product-card" aria-label="Produit Ordinateur portable">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2" ry="2"></rect><path d="M2 20h20"></path></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="name">Ordinateur portable</h3>
+                            <div class="meta">
+                                <span class="price">999,00 €</span>
+                                <div class="rating" aria-label="Note 4 sur 5">
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star empty" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary add-to-cart" data-product="Ordinateur portable">Ajouter au panier</a>
+                        </div>
+                    </article>
+
+                    <!-- Souris gaming -->
+                    <article class="product-card" aria-label="Produit Souris gaming">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="10" rx="3"></rect><rect x="5" y="10" width="14" height="12" rx="7"></rect><line x1="12" y1="6" x2="12" y2="8"></line></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="name">Souris gaming</h3>
+                            <div class="meta">
+                                <span class="price">59,90 €</span>
+                                <div class="rating" aria-label="Note 5 sur 5">
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary add-to-cart" data-product="Souris gaming">Ajouter au panier</a>
+                        </div>
+                    </article>
+
+                    <!-- Routeur Wi‑Fi -->
+                    <article class="product-card" aria-label="Produit Routeur Wi‑Fi">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12a10 10 0 0 1 20 0"></path><path d="M6 12a6 6 0 0 1 12 0"></path><path d="M10 12a2 2 0 0 1 4 0"></path><rect x="6" y="16" width="12" height="4" rx="1"></rect></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="name">Routeur Wi‑Fi</h3>
+                            <div class="meta">
+                                <span class="price">129,00 €</span>
+                                <div class="rating" aria-label="Note 4 sur 5">
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star empty" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary add-to-cart" data-product="Routeur Wi‑Fi">Ajouter au panier</a>
+                        </div>
+                    </article>
+
+                    <!-- Casque audio -->
+                    <article class="product-card" aria-label="Produit Casque audio">
+                        <div class="media" aria-hidden="true">
+                            <div class="placeholder-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 18 0"></path><path d="M7 12h-2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2z"></path><path d="M17 12h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <h3 class="name">Casque audio</h3>
+                            <div class="meta">
+                                <span class="price">89,00 €</span>
+                                <div class="rating" aria-label="Note 4 sur 5">
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star full" aria-hidden="true"></span>
+                                    <span class="star empty" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary add-to-cart" data-product="Casque audio">Ajouter au panier</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="site-footer" aria-labelledby="footer-heading">
+        <h2 id="footer-heading" class="sr-only">Pied de page</h2>
+        <div class="container">
+            <div class="footer-top">
+                <!-- Colonne gauche: logo + description -->
+                <div class="footer-col footer-brand">
+                    <a href="#" class="footer-logo" aria-label="TechZone – Accueil">TechZone</a>
+                    <p>Votre partenaire en solutions IT et accessoires</p>
+                </div>
+
+                <!-- Colonne centre: liens rapides -->
+                <nav class="footer-col footer-links" aria-label="Liens rapides">
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#produits">Produits</a></li>
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Colonne droite: réseaux sociaux -->
+                <div class="footer-col footer-social">
+                    <ul class="social-links" aria-label="Réseaux sociaux">
+                        <li>
+                            <a href="#" aria-label="Facebook">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.5V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9c1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12Z"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" aria-label="Twitter / X">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3l8.4 9.7L3.7 21h2.6l6.1-6.6l5 6.6H21l-8.8-11L20.3 3h-2.6l-5.5 6L7.8 3H3z"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 0 0 0-5zM3.5 9h3v12h-3zM10 9h2.9v1.6h.1c.4-.8 1.5-1.6 3.1-1.6c3.3 0 3.9 2.1 3.9 4.8V21h-3v-5.3c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-3V9z"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a5.5 5.5 0 1 1 0 11a5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7zm5-2.2a1 1 0 1 1 0 2a1 1 0 0 1 0-2z"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 TechZone - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
