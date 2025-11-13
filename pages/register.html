@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - TechZone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .register-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .register-header p {
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .password-requirements {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #3498db;
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: #5a6c7d;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-group label a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-group label a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-register:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .btn-register:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+
+        .divider span {
+            background-color: #ffffff;
+            padding: 0 15px;
+            color: #95a5a6;
+            font-size: 13px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background-color: #fee;
+            border-left: 4px solid #e74c3c;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #c0392b;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 540px) {
+            .register-container {
+                padding: 30px 25px;
+            }
+
+            .register-header h1 {
+                font-size: 24px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-group input {
+                padding: 10px 12px;
+            }
+
+            .btn-register {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .register-container {
+                padding: 25px 20px;
+            }
+
+            .register-header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <h1>Créer un compte</h1>
+            <p>Rejoignez TechZone et profitez de nos offres</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <form id="registerForm" action="#" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">Prénom</label>
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        name="firstName" 
+                        placeholder="John" 
+                        required
+                        autocomplete="given-name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Nom</label>
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        name="lastName" 
+                        placeholder="Doe" 
+                        required
+                        autocomplete="family-name"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="exemple@email.com" 
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Numéro de téléphone</label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    placeholder="+216 XX XXX XXX" 
+                    autocomplete="tel"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Créez un mot de passe sécurisé" 
+                    required
+                    autocomplete="new-password"
+                    minlength="8"
+                >
+                <div class="password-requirements">
+                    Minimum 8 caractères, au moins une majuscule et un chiffre
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirmer le mot de passe</label>
+                <input 
+                    type="password" 
+                    id="confirmPassword" 
+                    name="confirmPassword" 
+                    placeholder="Confirmez votre mot de passe" 
+                    required
+                    autocomplete="new-password"
+                    minlength="8"
+                >
+            </div>
+
+            <div class="checkbox-group">
+                <input 
+                    type="checkbox" 
+                    id="terms" 
+                    name="terms" 
+                    required
+                >
+                <label for="terms">
+                    J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+                </label>
+            </div>
+
+            <div class="checkbox-group">
+                <input 
+                    type="checkbox" 
+                    id="newsletter" 
+                    name="newsletter"
+                >
+                <label for="newsletter">
+                    Je souhaite recevoir les offres et nouveautés par email
+                </label>
+            </div>
+
+            <button type="submit" class="btn-register" id="submitBtn">Créer mon compte</button>
+        </form>
+
+        <div class="divider">
+            <span>OU</span>
+        </div>
+
+        <div class="login-link">
+            <p>Vous avez déjà un compte ? <a href="login.html">Connectez-vous</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Gestion du formulaire d'inscription
+        const registerForm = document.getElementById('registerForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Fonction pour afficher les erreurs
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+            
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // Validation du mot de passe
+        function validatePassword(password) {
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            
+            if (password.length < minLength) {
+                return 'Le mot de passe doit contenir au moins 8 caractères';
+            }
+            if (!hasUpperCase) {
+                return 'Le mot de passe doit contenir au moins une majuscule';
+            }
+            if (!hasNumber) {
+                return 'Le mot de passe doit contenir au moins un chiffre';
+            }
+            return null;
+        }
+
+        // Gestion de la soumission du formulaire
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const termsAccepted = document.getElementById('terms').checked;
+
+            // Validation
+            if (!firstName || !lastName) {
+                showError('Veuillez renseigner votre nom et prénom');
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                showError('Veuillez entrer une adresse email valide');
+                return;
+            }
+
+            const passwordError = validatePassword(password);
+            if (passwordError) {
+                showError(passwordError);
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('Les mots de passe ne correspondent pas');
+                return;
+            }
+
+            if (!termsAccepted) {
+                showError('Vous devez accepter les conditions d\'utilisation');
+                return;
+            }
+
+            // Désactiver le bouton pendant le traitement
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Création en cours...';
+
+            // Simulation de l'inscription
+            setTimeout(() => {
+                console.log('Inscription réussie:', { firstName, lastName, email, phone });
+                alert('Compte créé avec succès ! Redirection vers la page de connexion...');
+                
+                // Redirection vers la page de connexion
+                window.location.href = 'login.html';
+            }, 1500);
+        });
+
+        // Validation en temps réel des mots de passe
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        confirmPasswordInput.addEventListener('input', function() {
+            if (this.value && passwordInput.value !== this.value) {
+                this.style.borderColor = '#e74c3c';
+            } else {
+                this.style.borderColor = '#e0e0e0';
+            }
+        });
+    </script>
+</body>
+</html>

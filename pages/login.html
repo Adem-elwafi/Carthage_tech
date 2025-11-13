@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - TechZone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #7f8c8d;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #bdc3c7;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #3498db;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+
+        .divider span {
+            background-color: #ffffff;
+            padding: 0 15px;
+            color: #95a5a6;
+            font-size: 13px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 25px;
+            }
+
+            .login-header h1 {
+                font-size: 24px;
+            }
+
+            .form-group input {
+                padding: 10px 12px;
+            }
+
+            .btn-login {
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .login-container {
+                padding: 25px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Connexion à TechZone</h1>
+            <p>Accédez à votre compte pour continuer</p>
+        </div>
+
+        <form id="loginForm" action="#" method="POST">
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="exemple@email.com" 
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Entrez votre mot de passe" 
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">Mot de passe oublié ?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Se connecter</button>
+        </form>
+
+        <div class="divider">
+            <span>OU</span>
+        </div>
+
+        <div class="register-link">
+            <p>Pas encore inscrit ? <a href="register.html">Créez un compte</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Gestion basique du formulaire
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Validation basique
+            if (email && password) {
+                // Ici, vous ajouteriez la logique d'authentification
+                console.log('Tentative de connexion avec:', email);
+                alert('Fonctionnalité de connexion à implémenter');
+                // Redirection après connexion réussie
+                // window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
