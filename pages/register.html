@@ -16,22 +16,72 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow: hidden;
+        }
+
+        /**************** Background styling *****************/
+        .block {
+            position: absolute;
+            transform: translateY(-140vh);
+            height: 40vh;
+            z-index: -1;
+            width: 100%;
+            background: radial-gradient(rgba(255, 255, 255, 0.541), red);
+            border-radius: 40%;
+            box-shadow: 0px 0px 100px 10px black;
+            animation: block linear 5s infinite;
+        }
+
+        @keyframes block {
+            from {
+                transform: translateY(-140vh);
+            }
+            to {
+                transform: translateY(140vh);
+            }
+        }
+
+        .grid-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: grid;
+            grid-template-columns: repeat(40, 1fr);
+            grid-auto-rows: auto;
+            height: 100vh;
+            width: 100vw;
+            gap: 4px;
+        }
+
+        .grid-element {
+            aspect-ratio: 1 / 1;
+            background-color: black;
+            box-shadow: 0px 0px 3px red inset;
+            transition: background 0.3s ease;
+        }
+
+        .grid-element.hover-effect {
+            background: rgb(75, 7, 7);
         }
 
         .register-container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: rgb(49, 49, 49);
+            border-radius: 20px;
+            border: 5px rgba(255, 112, 112, 0.5) outset;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
             padding: 40px;
             width: 100%;
             max-width: 480px;
             animation: fadeIn 0.5s ease-in;
+            position: relative;
+            z-index: 10;
+            opacity: 0.95;
         }
 
         @keyframes fadeIn {
@@ -51,14 +101,14 @@
         }
 
         .register-header h1 {
-            color: #2c3e50;
+            color: #ffffff;
             font-size: 28px;
             font-weight: 600;
             margin-bottom: 10px;
         }
 
         .register-header p {
-            color: #7f8c8d;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
             font-weight: 300;
         }
@@ -76,7 +126,7 @@
 
         .form-group label {
             display: block;
-            color: #2c3e50;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 8px;
@@ -85,28 +135,29 @@
         .form-group input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e0e0e0;
+            border: 1px solid rgba(255, 112, 112, 0.3);
             border-radius: 8px;
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
             transition: all 0.3s ease;
-            background-color: #fafafa;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #3498db;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            border-color: rgba(255, 112, 112, 0.6);
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 112, 112, 0.1);
         }
 
         .form-group input::placeholder {
-            color: #bdc3c7;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .password-requirements {
             font-size: 12px;
-            color: #7f8c8d;
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 5px;
             line-height: 1.5;
         }
@@ -128,13 +179,13 @@
 
         .checkbox-group label {
             font-size: 13px;
-            color: #5a6c7d;
+            color: rgba(255, 255, 255, 0.8);
             cursor: pointer;
             user-select: none;
         }
 
         .checkbox-group label a {
-            color: #3498db;
+            color: rgb(255, 112, 112);
             text-decoration: none;
             font-weight: 500;
         }
@@ -146,7 +197,7 @@
         .btn-register {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            background: rgba(255, 0, 0, 0.6);
             color: #ffffff;
             border: none;
             border-radius: 8px;
@@ -155,12 +206,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
         }
 
         .btn-register:hover:not(:disabled) {
-            background: linear-gradient(135deg, #2980b9 0%, #21618c 100%);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: rgba(255, 0, 0, 0.8);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
             transform: translateY(-2px);
         }
 
@@ -190,9 +241,9 @@
         }
 
         .divider span {
-            background-color: #ffffff;
+            background-color: rgb(49, 49, 49);
             padding: 0 15px;
-            color: #95a5a6;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 13px;
             position: relative;
             z-index: 1;
@@ -204,19 +255,19 @@
         }
 
         .login-link p {
-            color: #7f8c8d;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 14px;
         }
 
         .login-link a {
-            color: #3498db;
+            color: rgb(255, 112, 112);
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
         }
 
         .login-link a:hover {
-            color: #2980b9;
+            color: rgb(255, 150, 150);
             text-decoration: underline;
         }
 
@@ -289,7 +340,7 @@
 
         .back-home a {
             display: inline-block;
-            color: #3498db;
+            color: rgb(255, 112, 112);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -297,7 +348,7 @@
         }
 
         .back-home a:hover {
-            color: #2980b9;
+            color: rgb(255, 150, 150);
         }
 
         .back-home a::before {
@@ -307,7 +358,7 @@
 
         .logo-link {
             display: inline-block;
-            color: #2c3e50;
+            color: #ffffff;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.5rem;
@@ -316,11 +367,215 @@
         }
 
         .logo-link:hover {
-            color: #3498db;
+            color: rgb(255, 112, 112);
         }
     </style>
 </head>
 <body>
+    <div class="grid-container">
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+        <div class="grid-element"></div>
+    </div>
+    
+    <div class="block"></div>
+
     <div class="register-container">
         <div class="back-home">
             <a href="index.html">Retour à l'accueil</a>
@@ -543,8 +798,19 @@
             if (this.value && passwordInput.value !== this.value) {
                 this.style.borderColor = '#e74c3c';
             } else {
-                this.style.borderColor = '#e0e0e0';
+                this.style.borderColor = 'rgba(255, 112, 112, 0.3)';
             }
+        });
+
+        // Grid hover effect
+        const gridElements = document.querySelectorAll('.grid-element');
+        gridElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.classList.add('hover-effect');
+            });
+            element.addEventListener('mouseleave', function() {
+                this.classList.remove('hover-effect');
+            });
         });
     </script>
 </body>

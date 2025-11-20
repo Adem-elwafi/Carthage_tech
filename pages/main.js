@@ -44,5 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
 				});
 		});
 	}
-});
 
+	// Animated grid background hover effects
+	const gridElements = document.querySelectorAll('.hero .grid-element');
+	
+	gridElements.forEach((element) => { 
+		element.addEventListener('mouseenter', () => { 
+			element.classList.add('hover-effect'); 
+		});
+
+		element.addEventListener('mouseleave', () => { 
+			setTimeout(() => {
+				element.classList.remove('hover-effect');
+			}, 300);
+		});
+	});
+});
