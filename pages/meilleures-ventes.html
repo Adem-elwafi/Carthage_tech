@@ -15,6 +15,13 @@
     <!-- Header (Barre de navigation) -->
     <header class="site-header">
         <div class="topbar" role="navigation" aria-label="Barre supérieure">
+            <!-- Hamburger Menu Toggle -->
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <!-- Logo -->
             <a href="index.html" class="logo" aria-label="Carthage Tech – Accueil">Carthage Tech</a>
 
@@ -28,18 +35,21 @@
             </form>
 
             <!-- Icône Panier (à droite) -->
-            <a href="#" class="cart" aria-label="Voir le panier">
+            <a href="cart.html" class="cart" aria-label="Voir le panier">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="9" cy="21" r="1"></circle>
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39A2 2 0 0 0 9.62 16h7.76a2 2 0 0 0 2-1.61L21 8H6"></path>
                 </svg>
+                <span id="cart-count" class="cart-badge">0</span>
             </a>
 
             <!-- Boutons Auth -->
-            <div class="auth-buttons">
-                <a href="login.html" class="btn-login">Login</a>
-                <a href="register.html" class="btn-signup">Sign Up</a>
+            <div class="auth-buttons" id="auth-buttons">
+                <a href="login.html" class="btn-login" id="login-btn">Connexion</a>
+                <a href="register.html" class="btn-signup" id="register-btn">S'inscrire</a>
+                <span id="user-name" style="display:none; margin-right: 10px; color: #333;"></span>
+                <button id="logout-btn" style="display:none;" class="btn-login">Déconnexion</button>
             </div>
         </div>
 
@@ -70,7 +80,17 @@
         <section class="featured" aria-labelledby="bestsellers-heading">
             <div class="container">
                 <h2 id="bestsellers-heading">Nos produits phares</h2>
-                <p style="text-align: center; color: #6b7280; margin-bottom: 40px;">Contenu à venir — Cette page affichera les best-sellers</p>
+                <p style="text-align: center; color: #6b7280; margin-bottom: 40px;">Les produits les plus populaires</p>
+                
+                <!-- Products Grid -->
+                <div class="products-grid" id="meilleures-ventes-products">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+                
+                <!-- Pagination -->
+                <div id="pagination-container" style="margin-top: 30px;">
+                    <!-- Pagination will be rendered here -->
+                </div>
             </div>
         </section>
     </main>
@@ -131,5 +151,19 @@
     </footer>
 
     <script src="main.js"></script>
+    
+    <!-- Backend Integration -->
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Load bestseller products when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            await updateAuthUI();
+            await updateCartBadge();
+            await loadFeaturedProducts('bestseller', 20, 'meilleures-ventes-products');
+        });
+    </script>
 </body>
 </html>

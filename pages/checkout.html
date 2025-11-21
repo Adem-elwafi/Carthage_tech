@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Carthage Tech</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Checkout-specific styles */
+        .checkout-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .checkout-form {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.2);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-option:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+
+        .payment-option input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .payment-option.selected {
+            border-color: #007bff;
+            background: #e7f3ff;
+        }
+
+        .order-summary {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .order-summary h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row.total {
+            font-size: 1.3em;
+            font-weight: 600;
+            border-top: 2px solid #333;
+            border-bottom: none;
+            margin-top: 10px;
+            padding-top: 15px;
+        }
+
+        .btn-place-order {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-place-order:hover {
+            background: #218838;
+        }
+
+        .btn-place-order:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .secure-checkout {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">Carthage Tech</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="ordinateurs.html">Computers</a></li>
+                <li><a href="accessoires.html">Accessories</a></li>
+                <li><a href="reseaux.html">Networks</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" id="login-btn">Login</a>
+                <a href="register.html" id="register-btn">Register</a>
+                <button id="logout-btn" style="display:none;">Logout</button>
+                <span id="user-name" style="display:none;"></span>
+                <a href="cart.html" class="cart-link">
+                    Cart <span id="cart-count" class="badge">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="checkout-page">
+        <h1>Checkout</h1>
+        
+        <div class="checkout-content">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <form id="checkout-form">
+                    <!-- Shipping Information -->
+                    <div class="form-section">
+                        <h3>Shipping Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="shipping_address">Street Address *</label>
+                            <textarea 
+                                id="shipping_address" 
+                                name="shipping_address" 
+                                rows="3" 
+                                required
+                                placeholder="Enter your full street address"></textarea>
+                            <small>Please include apartment/unit number if applicable</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="shipping_city">City *</label>
+                            <input 
+                                type="text" 
+                                id="shipping_city" 
+                                name="shipping_city" 
+                                required
+                                placeholder="e.g., Tunis, Sfax, Sousse">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="shipping_postal_code">Postal Code *</label>
+                            <input 
+                                type="text" 
+                                id="shipping_postal_code" 
+                                name="shipping_postal_code" 
+                                required
+                                pattern="\d{4}"
+                                maxlength="4"
+                                placeholder="4 digits (e.g., 1000)">
+                            <small>Must be 4 digits</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3>Payment Method</h3>
+                        
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input 
+                                    type="radio" 
+                                    name="payment_method" 
+                                    value="cash_on_delivery" 
+                                    checked>
+                                <div>
+                                    <strong>Cash on Delivery</strong>
+                                    <br>
+                                    <small>Pay when you receive your order</small>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input 
+                                    type="radio" 
+                                    name="payment_method" 
+                                    value="bank_transfer">
+                                <div>
+                                    <strong>Bank Transfer</strong>
+                                    <br>
+                                    <small>Transfer payment to our bank account</small>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input 
+                                    type="radio" 
+                                    name="payment_method" 
+                                    value="card">
+                                <div>
+                                    <strong>Credit/Debit Card</strong>
+                                    <br>
+                                    <small>Pay securely with your card</small>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-place-order">
+                        Place Order
+                    </button>
+                    
+                    <div class="secure-checkout">
+                        <span>🔒</span>
+                        <span>Secure checkout - Your information is protected</span>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                
+                <div id="order-summary-content">
+                    <!-- Will be populated by JavaScript -->
+                    <p style="color: #666;">Loading order details...</p>
+                </div>
+                
+                <button type="button" onclick="window.location.href='cart.html'" 
+                        style="width: 100%; padding: 10px; margin-top: 15px; 
+                               background: #6c757d; color: white; border: none; 
+                               border-radius: 5px; cursor: pointer;">
+                    Back to Cart
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Carthage Tech. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/orders.js"></script>
+    
+    <!-- Protect this page and load order summary -->
+    <script>
+        // Check if user is logged in
+        if (!isLoggedIn()) {
+            protectPage('checkout.html');
+        }
+        
+        // Load order summary
+        async function loadOrderSummary() {
+            try {
+                const response = await apiCall('/cart/view.php', 'GET');
+                const { cart_items, summary } = response.data;
+                
+                if (!cart_items || cart_items.length === 0) {
+                    showNotification('Your cart is empty', 'error');
+                    setTimeout(() => {
+                        window.location.href = 'cart.html';
+                    }, 2000);
+                    return;
+                }
+                
+                const summaryHtml = `
+                    <div class="summary-row">
+                        <span>Items:</span>
+                        <span>${summary.total_items}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span>${formatPrice(summary.cart_total)}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (19%):</span>
+                        <span>${formatPrice(summary.cart_total * 0.19)}</span>
+                    </div>
+                    <div class="summary-row total">
+                        <strong>Total:</strong>
+                        <strong>${formatPrice(summary.cart_total * 1.19)}</strong>
+                    </div>
+                `;
+                
+                document.getElementById('order-summary-content').innerHTML = summaryHtml;
+                
+            } catch (error) {
+                console.error('Error loading order summary:', error);
+                document.getElementById('order-summary-content').innerHTML = 
+                    '<p class="error-message">Failed to load order summary</p>';
+            }
+        }
+        
+        // Load summary when page loads
+        document.addEventListener('DOMContentLoaded', loadOrderSummary);
+        
+        // Add selected class to payment option when clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Select first option by default
+            if (paymentOptions.length > 0) {
+                paymentOptions[0].classList.add('selected');
+            }
+        });
+    </script>
+</body>
+</html>

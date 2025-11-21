@@ -1,5 +1,48 @@
 // Minimal enhancement: prevent empty search submissions and demo handling
 document.addEventListener('DOMContentLoaded', () => {
+	// Hamburger Menu Toggle
+	const menuToggle = document.querySelector('.menu-toggle');
+	const mainNav = document.querySelector('.main-nav');
+	
+	if (menuToggle && mainNav) {
+		menuToggle.addEventListener('click', () => {
+			menuToggle.classList.toggle('active');
+			mainNav.classList.toggle('active');
+			
+			// Update aria-expanded for accessibility
+			const isExpanded = menuToggle.classList.contains('active');
+			menuToggle.setAttribute('aria-expanded', isExpanded);
+			
+			// Prevent body scroll when menu is open
+			if (isExpanded) {
+				document.body.style.overflow = 'hidden';
+			} else {
+				document.body.style.overflow = '';
+			}
+		});
+		
+		// Close menu when clicking outside
+		document.addEventListener('click', (e) => {
+			if (!menuToggle.contains(e.target) && !mainNav.contains(e.target) && mainNav.classList.contains('active')) {
+				menuToggle.classList.remove('active');
+				mainNav.classList.remove('active');
+				menuToggle.setAttribute('aria-expanded', 'false');
+				document.body.style.overflow = '';
+			}
+		});
+		
+		// Close menu when clicking on a nav link
+		const navLinks = mainNav.querySelectorAll('a');
+		navLinks.forEach(link => {
+			link.addEventListener('click', () => {
+				menuToggle.classList.remove('active');
+				mainNav.classList.remove('active');
+				menuToggle.setAttribute('aria-expanded', 'false');
+				document.body.style.overflow = '';
+			});
+		});
+	}
+
 	const form = document.querySelector('.search');
 	const input = form ? form.querySelector('input[type="search"]') : null;
 

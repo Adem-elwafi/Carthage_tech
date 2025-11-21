@@ -82,6 +82,8 @@
             position: relative;
             z-index: 10;
             opacity: 0.95;
+            height: 90vh;
+            overflow: auto;
         }
 
         @keyframes fadeIn {
@@ -589,14 +591,15 @@
 
         <div id="errorMessage" class="error-message"></div>
 
-        <form id="registerForm" action="#" method="POST">
+        <!-- Register form - ID changed to match auth.js expectations -->
+        <form id="register-form" action="#" method="POST">
             <div class="form-row">
                 <div class="form-group">
                     <label for="firstName">Prénom</label>
                     <input 
                         type="text" 
                         id="firstName" 
-                        name="firstName" 
+                        name="first_name" 
                         placeholder="John" 
                         required
                         autocomplete="given-name"
@@ -608,7 +611,7 @@
                     <input 
                         type="text" 
                         id="lastName" 
-                        name="lastName" 
+                        name="last_name" 
                         placeholder="Doe" 
                         required
                         autocomplete="family-name"
@@ -634,9 +637,12 @@
                     type="tel" 
                     id="phone" 
                     name="phone" 
-                    placeholder="+216 XX XXX XXX" 
+                    placeholder="12345678" 
+                    pattern="\d{8}"
+                    required
                     autocomplete="tel"
                 >
+                <small style="color: #ccc;">8 chiffres requis</small>
             </div>
 
             <div class="form-group">
@@ -648,10 +654,10 @@
                     placeholder="Créez un mot de passe sécurisé" 
                     required
                     autocomplete="new-password"
-                    minlength="8"
+                    minlength="6"
                 >
                 <div class="password-requirements">
-                    Minimum 8 caractères, au moins une majuscule et un chiffre
+                    Minimum 6 caractères
                 </div>
             </div>
 
@@ -660,11 +666,11 @@
                 <input 
                     type="password" 
                     id="confirmPassword" 
-                    name="confirmPassword" 
+                    name="confirm-password" 
                     placeholder="Confirmez votre mot de passe" 
                     required
                     autocomplete="new-password"
-                    minlength="8"
+                    minlength="6"
                 >
             </div>
 
@@ -703,106 +709,13 @@
         </div>
     </div>
 
+    <!-- Load backend integration scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    
     <script>
-        // Gestion du formulaire d'inscription
-        const registerForm = document.getElementById('registerForm');
-        const errorMessage = document.getElementById('errorMessage');
-        const submitBtn = document.getElementById('submitBtn');
-
-        // Fonction pour afficher les erreurs
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.classList.add('show');
-            
-            setTimeout(() => {
-                errorMessage.classList.remove('show');
-            }, 5000);
-        }
-
-        // Validation du mot de passe
-        function validatePassword(password) {
-            const minLength = 8;
-            const hasUpperCase = /[A-Z]/.test(password);
-            const hasNumber = /\d/.test(password);
-            
-            if (password.length < minLength) {
-                return 'Le mot de passe doit contenir au moins 8 caractères';
-            }
-            if (!hasUpperCase) {
-                return 'Le mot de passe doit contenir au moins une majuscule';
-            }
-            if (!hasNumber) {
-                return 'Le mot de passe doit contenir au moins un chiffre';
-            }
-            return null;
-        }
-
-        // Gestion de la soumission du formulaire
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const termsAccepted = document.getElementById('terms').checked;
-
-            // Validation
-            if (!firstName || !lastName) {
-                showError('Veuillez renseigner votre nom et prénom');
-                return;
-            }
-
-            if (!email || !email.includes('@')) {
-                showError('Veuillez entrer une adresse email valide');
-                return;
-            }
-
-            const passwordError = validatePassword(password);
-            if (passwordError) {
-                showError(passwordError);
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                showError('Les mots de passe ne correspondent pas');
-                return;
-            }
-
-            if (!termsAccepted) {
-                showError('Vous devez accepter les conditions d\'utilisation');
-                return;
-            }
-
-            // Désactiver le bouton pendant le traitement
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Création en cours...';
-
-            // Simulation de l'inscription
-            setTimeout(() => {
-                console.log('Inscription réussie:', { firstName, lastName, email, phone });
-                alert('Compte créé avec succès ! Redirection vers la page de connexion...');
-                
-                // Redirection vers la page de connexion
-                window.location.href = 'login.html';
-            }, 1500);
-        });
-
-        // Validation en temps réel des mots de passe
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirmPassword');
-
-        confirmPasswordInput.addEventListener('input', function() {
-            if (this.value && passwordInput.value !== this.value) {
-                this.style.borderColor = '#e74c3c';
-            } else {
-                this.style.borderColor = 'rgba(255, 112, 112, 0.3)';
-            }
-        });
-
-        // Grid hover effect
+        // Grid hover effect (keep existing animation)
         const gridElements = document.querySelectorAll('.grid-element');
         gridElements.forEach(element => {
             element.addEventListener('mouseenter', function() {

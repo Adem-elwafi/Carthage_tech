@@ -203,7 +203,12 @@
 
     <div class="login-container">
         <h2>Connexion</h2>
-        <form>
+        
+        <!-- Message container for notifications -->
+        <div id="message" style="display:none; margin-bottom: 15px;"></div>
+        
+        <!-- Login form - ID is important for JavaScript -->
+        <form id="login-form">
             <div>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="votre@email.com" required>
@@ -217,6 +222,9 @@
         <p class="signup-link">Pas encore de compte ? <a href="register.html">S'inscrire</a></p>
     </div>
 
-    <script src="login.js"></script>
+    <!-- Load backend integration scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
 </body>
 </html>
