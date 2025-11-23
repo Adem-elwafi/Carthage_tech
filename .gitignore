@@ -1,0 +1,34 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PHP
+vendor/
+composer.lock
+
+# Logs
+*.log
+error_log
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Database
+*.sql
+*.sqlite
+
+# Environment files
+.env
+.env.local
+
+# Node modules (if you add any frontend build tools later)
+node_modules/
