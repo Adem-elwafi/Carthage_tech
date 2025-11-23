@@ -211,7 +211,8 @@ function renderCart(cartItems, summary, containerId = 'cart-container') {
                                                value="${item.quantity}" 
                                                min="1" 
                                                max="${item.stock_available}"
-                                               onchange="updateQuantity(${item.cart_id}, this.value)"
+                                               data-cart-id="${item.cart_id}"
+                                               class="qty-input"
                                                id="qty-${item.cart_id}">
                                         <button onclick="updateQuantity(${item.cart_id}, ${item.quantity + 1})"
                                                 ${item.quantity >= item.stock_available ? 'disabled' : ''}>
@@ -272,6 +273,27 @@ function renderCart(cartItems, summary, containerId = 'cart-container') {
     `;
     
     container.innerHTML = html;
+    
+    // Add event listeners for quantity inputs with debounce
+    const qtyInputs = container.querySelectorAll('.qty-input');
+    let updateTimer;
+    
+    qtyInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            const cartId = parseInt(this.dataset.cartId);
+            const newQty = parseInt(this.value);
+            
+            // Clear previous timer
+            clearTimeout(updateTimer);
+            
+            // Set new timer - only update after user stops typing for 800ms
+            updateTimer = setTimeout(() => {
+                if (!isNaN(newQty) && newQty >= 1) {
+                    updateQuantity(cartId, newQty);
+                }
+            }, 800);
+        });
+    });
 }
 
 // ============================================================================
@@ -302,16 +324,54 @@ async function updateQuantity(cartId, newQuantity) {
             quantity: newQuantity
         };
         
-        // Call API
-        const response = await apiCall('/cart/update.php', 'POST', data);
+        // Try PUT first (RESTful standard), fallback to POST if needed
+        let response;
+        try {
+            response = await apiCall('/cart/update.php', 'PUT', data);
+        } catch (error) {
+            // If PUT fails (405 Method Not Allowed), try POST
+            if (error.message.includes('405') || error.message.includes('Method')) {
+                console.warn('PUT method not allowed, falling back to POST');
+                response = await apiCall('/cart/update.php', 'POST', data);
+            } else {
+                throw error;
+            }
+        }
         
-        // Show success notification
-        if (typeof showNotification === 'function') {
+        // Show success notification (silent for button clicks)
+        if (typeof showNotification === 'function' && !document.activeElement.matches('.qty-input')) {
             showNotification('Cart updated successfully', 'success');
         }
         
-        // Reload cart display
-        await loadCart();
+        // Only reload cart if update was from button click, not from input field
+        if (!document.activeElement.matches('.qty-input')) {
+            await loadCart();
+        } else {
+            // Just update the cart badge without full reload
+            await updateCartBadge();
+            
+            // Update the subtotal and total in place
+            const cartRow = document.querySelector(`.cart-item[data-cart-id="${cartId}"]`);
+            if (cartRow && response.data.item) {
+                const subtotalCell = cartRow.querySelector('.subtotal strong');
+                if (subtotalCell) {
+                    subtotalCell.textContent = formatPrice(response.data.item.subtotal);
+                }
+            }
+            
+            // Update the summary totals
+            if (response.data.summary) {
+                const summaryRows = document.querySelectorAll('.summary-row');
+                summaryRows.forEach(row => {
+                    if (row.textContent.includes('Subtotal:')) {
+                        row.querySelector('span:last-child').textContent = formatPrice(response.data.summary.cart_total);
+                    }
+                    if (row.classList.contains('total')) {
+                        row.querySelector('strong:last-child').textContent = formatPrice(response.data.summary.cart_total);
+                    }
+                });
+            }
+        }
         
         return response.data;
         
@@ -348,8 +408,19 @@ async function removeFromCart(cartId) {
         // Prepare data
         const data = { cart_id: cartId };
         
-        // Call API
-        const response = await apiCall('/cart/remove.php', 'POST', data);
+        // Try DELETE first (RESTful standard), fallback to POST if needed
+        let response;
+        try {
+            response = await apiCall('/cart/remove.php', 'DELETE', data);
+        } catch (error) {
+            // If DELETE fails (405 Method Not Allowed), try POST
+            if (error.message.includes('405') || error.message.includes('Method')) {
+                console.warn('DELETE method not allowed, falling back to POST');
+                response = await apiCall('/cart/remove.php', 'POST', data);
+            } else {
+                throw error;
+            }
+        }
         
         // Show success notification
         if (typeof showNotification === 'function') {
@@ -393,8 +464,19 @@ async function clearCart() {
         const confirmed = confirm('Are you sure you want to clear your entire cart?');
         if (!confirmed) return;
         
-        // Call API
-        const response = await apiCall('/cart/clear.php', 'POST');
+        // Try DELETE first (RESTful standard), fallback to POST if needed
+        let response;
+        try {
+            response = await apiCall('/cart/clear.php', 'DELETE');
+        } catch (error) {
+            // If DELETE fails (405 Method Not Allowed), try POST
+            if (error.message.includes('405') || error.message.includes('Method')) {
+                console.warn('DELETE method not allowed, falling back to POST');
+                response = await apiCall('/cart/clear.php', 'POST');
+            } else {
+                throw error;
+            }
+        }
         
         // Show success notification
         if (typeof showNotification === 'function') {

@@ -20,7 +20,7 @@
  * Base URL for all API endpoints
  * Change this if your backend is hosted elsewhere
  */
-const BASE_URL = 'http://localhost/ChTechbackend/backend/api';
+const BASE_URL = 'http://localhost/charthage_tech/backend/api';
 
 // ============================================================================
 // CORE API FUNCTIONS
@@ -34,7 +34,7 @@ const BASE_URL = 'http://localhost/ChTechbackend/backend/api';
  * 
  * @param {string} endpoint - The API endpoint (e.g., '/auth/login.php')
  * @param {string} method - HTTP method: 'GET', 'POST', 'PUT', 'DELETE'
- * @param {object|null} data - Data to send in request body (for POST/PUT)
+ * @param {object|null} data - Data to send in request body (for POST/PUT/DELETE)
  * @returns {Promise<object>} - Parsed JSON response from API
  * @throws {Error} - Throws error if request fails or API returns error
  * 
@@ -48,22 +48,30 @@ async function apiCall(endpoint, method = 'GET', data = null) {
         
         // Configure fetch options
         const options = {
-            method: method, // HTTP method (GET, POST, etc.)
+            method: method, // HTTP method (GET, POST, PUT, DELETE, etc.)
             headers: {
                 'Content-Type': 'application/json', // Tell server we're sending JSON
             },
             credentials: 'include' // IMPORTANT: Include cookies for PHP session management
         };
         
-        // Add request body for POST/PUT requests
+        // Add request body for POST/PUT/DELETE requests with data
         // JSON.stringify() converts JavaScript object to JSON string
-        if (data && (method === 'POST' || method === 'PUT')) {
+        if (data && (method === 'POST' || method === 'PUT' || method === 'DELETE')) {
             options.body = JSON.stringify(data);
         }
         
         // Make the HTTP request
         // fetch() returns a Promise, await waits for it to complete
         const response = await fetch(url, options);
+        
+        // Handle 401 Unauthorized - redirect to login
+        if (response.status === 401) {
+            console.warn('Authentication required - session expired or invalid');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
+            throw new Error('Authentication required');
+        }
         
         // Parse JSON response
         // await waits for the JSON parsing to complete
@@ -79,6 +87,12 @@ async function apiCall(endpoint, method = 'GET', data = null) {
         return result;
         
     } catch (error) {
+        // Handle CORS errors specifically
+        if (error.message.includes('CORS') || error.name === 'TypeError' && error.message.includes('fetch')) {
+            console.error('CORS Error: Make sure you are accessing the page via http://localhost (not file://)');
+            console.error('Backend must allow Origin: http://localhost with credentials');
+        }
+        
         // Log error to console for debugging
         console.error('API Call Error:', error);
         // Re-throw error so calling code can handle it

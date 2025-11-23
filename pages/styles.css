@@ -134,6 +134,13 @@ body {
 	gap: 10px;
 }
 
+/* Username display (force white across all pages) */
+#user-name {
+	color: #fff !important;
+	font-weight: 500;
+	letter-spacing: .3px;
+}
+
 .btn-login, .btn-signup {
 	display: inline-block;
 	padding: 8px 18px;
@@ -461,7 +468,7 @@ body {
 /* Categories Section */
 .categories {
 	padding: 48px 16px 64px;
-	background: #0a0a0a;
+	background: var(--bg);
 }
 .categories .container {
 	max-width: 1200px;
@@ -567,6 +574,7 @@ body {
 	overflow: hidden;
 	position: relative;
 	transition: box-shadow 160ms ease, transform 160ms ease;
+	color: #111; /* Ensure dark text on white background */
 }
 .product-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); transform: translateY(-2px); }
 .product-card .media {
@@ -607,6 +615,7 @@ body {
 	margin: 0;
 	font-size: 1.05rem;
 	font-weight: 600;
+	color: #111; /* Override inherited white text */
 }
 .product-card .meta {
 	display: flex;
